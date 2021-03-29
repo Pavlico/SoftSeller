@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="seller" resource="default" engine="innodb">
+        <column xsi:type="int" name="seller_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Seller id"/>
+        <column xsi:type="text" name="code" comment="Code"/>
+        <column xsi:type="text" name="name" comment="Name"/>
+        <column xsi:type="text" name="link" comment="Link"/>
+        <column xsi:type="text" name="logo" comment="Logo"/>
+        <column xsi:type="text" name="description" comment="Description"/>
+        <column xsi:type="text" name="contact_info" comment="Contact Info"/>
+        <column xsi:type="boolean" name="is_enabled" comment="Is enabled" default="1"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+                <column name="seller_id"/>
+        </constraint>
+    </table>
+    <table name="seller_reviews" resource="default" engine="innodb">
+        <column xsi:type="int" name="review_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Review id"/>
+        <column xsi:type="int" name="seller_id" comment="Seller id"/>
+        <column xsi:type="text" name="rate" comment="Rate"/>
+        <column xsi:type="text" name="title" comment="Title"/>
+        <column xsi:type="text" name="message" comment="Message"/>
+        <column xsi:type="boolean" name="is_confirmed" comment="Is confirmed"/>
+        <column xsi:type="text" name="created_at" comment="Created at"/>
+        <column xsi:type="text" name="updated_at" comment="Updated at"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+                <column name="review_id"/>
+        </constraint>
+    </table>
+</schema>
