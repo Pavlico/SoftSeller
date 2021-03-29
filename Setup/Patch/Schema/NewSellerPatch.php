@@ -4,7 +4,7 @@ namespace Softserve\Seller\Setup\Patch\Schema;
 use Magento\Framework\Setup\Patch\SchemaPatchInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 
-class SellerPatch implements SchemaPatchInterface
+class NewSellerPatch implements SchemaPatchInterface
 {
     /**
      * @var ModuleDataSetupInterface
@@ -17,6 +17,9 @@ class SellerPatch implements SchemaPatchInterface
         $this->moduleDataSetup = $moduleDataSetup;
     }
 
+    /**
+     * Add softserve seller to db
+     */
     public function apply(): void
     {
         $this->moduleDataSetup->startSetup();
