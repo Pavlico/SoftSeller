@@ -1,5 +1,5 @@
 <?php
-namespace Softserve\Seller\Model\Codes\ResourceModel\Sellers;
+namespace Softserve\Seller\Model\Seller\ResourceModel\Seller;
 
 use Magento\Cms\Model\ResourceModel\AbstractCollection;
 
@@ -31,7 +31,7 @@ class Collection extends AbstractCollection
      */
     protected function _construct()
     {
-        $this->_init('Softserve\Seller\Model\Sellers\Sellers', 'Softserve\Seller\Model\Sellers\ResourceModel\Sellers');
+        $this->_init('Softserve\Seller\Model\Seller\Seller', 'Softserve\Seller\Model\Seller\ResourceModel\Seller');
     }
     /**
      * Set first store flag

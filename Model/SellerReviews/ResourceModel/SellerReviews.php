@@ -11,7 +11,7 @@ class SellerReviews extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     /**
      * @var \Softserve\Seller\Model\SellerReviews\ResourceModel\SellerReviews\CollectionFactory
      */
-    protected $sellersCollection;
+    protected $sellerCollection;
 
     /**
      * Construct.
@@ -34,6 +34,6 @@ class SellerReviews extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _construct()
     {
-        $this->_init('sellers', 'review_id');
+        $this->_init('seller_reviews', 'review_id');
     }
 }

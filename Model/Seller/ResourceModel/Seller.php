@@ -1,7 +1,7 @@
 <?php
-namespace Softserve\Seller\Model\Sellers\ResourceModel;
+namespace Softserve\Seller\Model\Seller\ResourceModel;
 
-class Sellers extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+class Seller extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
     /**
      * @var string
@@ -9,24 +9,24 @@ class Sellers extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     protected $_idFieldName = 'seller_id';
 
     /**
-     * @var \Softserve\Seller\Model\Sellers\ResourceModel\Sellers\CollectionFactory
+     * @var \Softserve\Seller\Model\Seller\ResourceModel\Seller\CollectionFactory
      */
-    protected $sellersCollection;
+    protected $sellerCollection;
 
     /**
      * Construct.
      *
      * @param \Magento\Framework\Model\ResourceModel\Db\Context $context
-     * @param \Softserve\Seller\Model\Sellers\ResourceModel\Sellers\CollectionFactory $sellersCollection
+     * @param \Softserve\Seller\Model\Seller\ResourceModel\Seller\CollectionFactory $sellerCollection
      * @param string|null $resourcePrefix
      */
     public function __construct(
         \Magento\Framework\Model\ResourceModel\Db\Context $context,
-        \Softserve\Seller\Model\Sellers\ResourceModel\Sellers\CollectionFactory $sellersCollection,
+        \Softserve\Seller\Model\Seller\ResourceModel\Seller\CollectionFactory $sellerCollection,
         $resourcePrefix = null
     ) {
         parent::__construct($context, $resourcePrefix);
-        $this->sellersCollection = $sellersCollection;
+        $this->sellerCollection = $sellerCollection;
     }
 
     /**
@@ -34,6 +34,6 @@ class Sellers extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _construct()
     {
-        $this->_init('sellers', 'seller_id');
+        $this->_init('seller', 'seller_id');
     }
 }

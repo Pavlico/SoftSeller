@@ -1,5 +1,5 @@
 <?php
-namespace Softserve\Seller\Model\Codes;
+namespace Softserve\Seller\Model\SellerReviews;
 
 use Softserve\Seller\Api\Data\SellerReviewsInterface;
 

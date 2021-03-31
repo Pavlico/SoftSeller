@@ -1,23 +1,23 @@
 <?php
 namespace Softserve\Seller\Api;
 
-interface SellersRepositoryInterface
+interface SellerRepositoryInterface
 {
     /**
      * Create seller
      *
-     * @param \Softserve\Seller\Api\Data\SellersInterface $seller
+     * @param \Softserve\Seller\Api\Data\SellerInterface $seller
      * @param bool
-     * @return \Softserve\Seller\Api\Data\SellersInterface
+     * @return \Softserve\Seller\Api\Data\SellerInterface
      * @throws \Magento\Framework\Exception\CouldNotSaveException
      */
-    public function save(\Softserve\Seller\Api\Data\SellersInterface $seller);
+    public function save(\Softserve\Seller\Api\Data\SellerInterface $seller);
 
     /**
      * Get seller by code
      *
      * @param string $code
-     * @return \Softserve\Seller\Api\Data\SellersInterface
+     * @return \Softserve\Seller\Api\Data\SellerInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function get($code);
@@ -29,19 +29,19 @@ interface SellersRepositoryInterface
      * @param bool $editMode
      * @param int|null $storeId
      * @param bool $forceReload
-     * @return \Softserve\Seller\Api\Data\SellersInterface
+     * @return \Softserve\Seller\Api\Data\SellerInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getById($sellerId);
 
     /**
-     * Delete sellers
+     * Delete seller
      *
-     * @param \Softserve\Seller\Api\Data\SellersInterface $sellers
+     * @param \Softserve\Seller\Api\Data\SellerInterface $seller
      * @return bool Will returned True if deleted
      * @throws \Magento\Framework\Exception\StateException
      */
-    public function delete(\Softserve\Seller\Api\Data\SellersInterface $sellers);
+    public function delete(\Softserve\Seller\Api\Data\SellerInterface $seller);
 
     /**
      * @param string $id
@@ -52,7 +52,7 @@ interface SellersRepositoryInterface
     public function deleteById($id);
 
     /**
-     * Get sellers list
+     * Get seller list
      *
      * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
      * @return \Magento\Framework\Api\SearchResults
