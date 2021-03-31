@@ -1,18 +1,20 @@
 <?php
-namespace Softserve\Seller\Setup\Patch\Schema;
+namespace Softserve\Seller\Setup\Patch\Data;
 
-use Magento\Framework\Setup\Patch\SchemaPatchInterface;
-use Magento\Framework\Setup\ModuleDataSetupInterface;
+use Magento\Framework\Setup\Patch\DataPatchInterface;
 
-class NewSellerPatch implements SchemaPatchInterface
+class NewSellerPatch implements DataPatchInterface
 {
     /**
-     * @var ModuleDataSetupInterface
+     * @var Magento\Framework\Setup\ModuleDataSetupInterface
      */
     private $moduleDataSetup;
 
+    /**
+     * @param \Magento\Framework\Setup\ModuleDataSetupInterface $moduleDataSetup
+     */
     public function __construct(
-       ModuleDataSetupInterface $moduleDataSetup
+       \Magento\Framework\Setup\ModuleDataSetupInterface $moduleDataSetup
     ) {
         $this->moduleDataSetup = $moduleDataSetup;
     }

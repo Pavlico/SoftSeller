@@ -1,20 +1,20 @@
 <?php
-namespace Softserve\Seller\Model\Sellers;
+namespace Softserve\Seller\Model\Seller;
 
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\StateException;
-use Softserve\Seller\Api\SellersRepositoryInterface;
+use Softserve\Seller\Api\SellerRepositoryInterface;
 
-class SellersRepository implements SellersRepositoryInterface
+class SellerRepository implements SellerRepositoryInterface
 {
     /**
-     * @var \Softserver\Seller\Model\Sellers\SellersFactory 
+     * @var \Softserver\Seller\Model\Seller\SellerFactory 
      */
-    protected $sellersFactory;
+    protected $sellerFactory;
 
     /**
-     * @var \Softserve\Seller\Model\Sellers\ResourceModel\Sellers\CollectionFactory
+     * @var \Softserve\Seller\Model\Seller\ResourceModel\Seller\CollectionFactory
      */
     protected $collectionFactory;
 
@@ -29,18 +29,18 @@ class SellersRepository implements SellersRepositoryInterface
     protected $collectionProcessor;
 
     /**
-     * @param \Softserver\Seller\Model\Sellers\SellersFactory $sellersFactory
-     * @param \Softserve\Seller\Model\Sellers\ResourceModel\Sellers\CollectionFactory $collectionFactory
+     * @param \Softserver\Seller\Model\Seller\SellerFactory $sellerFactory
+     * @param \Softserve\Seller\Model\Seller\ResourceModel\Seller\CollectionFactory $collectionFactory
      * @param \Magento\Framework\Api\SearchResultsInterface $searchResults
      * @param \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
      */
     public function __construct(
-        \Softserve\Seller\Model\Sellers\SellersFactory $sellersFactory,
-        \Softserve\Seller\Model\Sellers\ResourceModel\Sellers\CollectionFactory $collectionFactory,
+        \Softserve\Seller\Model\Seller\SellerFactory $sellerFactory,
+        \Softserve\Seller\Model\Seller\ResourceModel\Seller\CollectionFactory $collectionFactory,
         \Magento\Framework\Api\SearchResultsInterface $searchResults,
         \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
     ) {
-        $this->sellersFactory = $sellersFactory;
+        $this->sellerFactory = $sellerFactory;
         $this->collectionFactory = $collectionFactory;
         $this->searchResults = $searchResults;
         $this->collectionProcessor = $collectionProcessor;
@@ -50,60 +50,60 @@ class SellersRepository implements SellersRepositoryInterface
      * Get code by id
      *
      * @param string $id
-     * @return \Softserve\Seller\Model\Codes\Codes
+     * @return \Softserve\Seller\Model\Seller\Seller
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getById($id)
     {
-        $sellers = $this->sellersFactory->create();
-        $sellers->getResource()->load($sellers, $id);
-        if (!$sellers->getId()) {
+        $seller = $this->sellerFactory->create();
+        $seller->getResource()->load($seller, $id);
+        if (!$seller->getId()) {
             throw new NoSuchEntityException(__('Unable to find seller with ID "%1"', $id));
         }
-        return $sellers;
+        return $seller;
     }
     
     /**
      * Get seller by code
      *
-     * @param string $sellers
-     * @return Softserve\Seller\Model\Codes\Codes
+     * @param string $seller
+     * @return Softserve\Seller\Model\Seller\Seller
      */
     public function get($code)
     {
-        $sellersCollection = $this->collectionFactory->create();
-        $sellersCollection->getByCode($code);
-        return $sellersCollection;
+        $sellerCollection = $this->collectionFactory->create();
+        $sellerCollection->getByCode($code);
+        return $sellerCollection;
     }
      
     /**
      * Save Seller
      *
-     * @param Softserve\Seller\Api\Data\SellersInterface
+     * @param Softserve\Seller\Api\Data\SellerInterface
      * @return bool Will returned True if saved
      */
-    public function save(\Softserve\Seller\Api\Data\SellersInterface $seller)
+    public function save(\Softserve\Seller\Api\Data\SellerInterface $seller)
     {
-        $sellers = $this->sellersFactory->create();
-        $sellers->getResource()->save($seller);
-        if (!$sellers->getSellerId()) {
+        $seller = $this->sellerFactory->create();
+        $seller->getResource()->save($seller);
+        if (!$seller->getSellerId()) {
             throw new CouldNotSaveException(__('Unable to save code'));
         }
-        return $sellers;
+        return $seller;
     }
      
     /**
      * Delete code
      *
-     * @param Softserve\Seller\Api\Data\SellersInterface
+     * @param Softserve\Seller\Api\Data\SellerInterface
      * @return bool Will returned True if deleted
      * @throws \Magento\Framework\Exception\StateException
      */
-    public function delete(\Softserve\Seller\Api\Data\SellersInterface $seller)
+    public function delete(\Softserve\Seller\Api\Data\SellerInterface $seller)
     {
-        $sellers = $this->sellersFactory->create();
-        $sellers->getResource()->delete($seller);
-        if ($sellers->getSellerId()) {
+        $seller = $this->sellerFactory->create();
+        $seller->getResource()->delete($seller);
+        if ($seller->getSellerId()) {
             throw new StateException(__('Unable to delete code'));
         }
         return true;
@@ -117,20 +117,20 @@ class SellersRepository implements SellersRepositoryInterface
      */
     public function deleteById($id)
     {
-        $sellers = $this->sellersFactory->create();
-        $sellers->getResource()->load($sellers, $id);
-        if (!$sellers->getSellerId()) {
+        $seller = $this->sellerFactory->create();
+        $seller->getResource()->load($seller, $id);
+        if (!$seller->getSellerId()) {
             throw new NoSuchEntityException(__('Unable to find seller with ID "%1"', $id));
         }
-        $sellers->getResource()->delete($sellers);
-        if ($sellers->getSellerId()) {
+        $seller->getResource()->delete($seller);
+        if ($seller->getSellerId()) {
             throw new StateException(__('Unable to delete seller'));
         }
         return true;
     }
 
     /**
-     * Get sellers list
+     * Get seller list
      *
      * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
      * @return \Magento\Framework\Api\SearchResults

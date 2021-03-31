@@ -1,5 +1,5 @@
 <?php
-namespace Softserve\Seller\Model\Codes\ResourceModel\SellerReviews;
+namespace Softserve\Seller\Model\SellerReviews\ResourceModel\SellerReviews;
 
 use Magento\Cms\Model\ResourceModel\AbstractCollection;
 
@@ -13,13 +13,13 @@ class Collection extends AbstractCollection
      * Event prefix
      * @var string
      */
-    protected $_eventPrefix = 'seller_collection';
+    protected $_eventPrefix = 'seller_reviews_collection';
 
     /**
      * Event object
      * @var string
      */
-    protected $_eventObject = 'seller_collection';
+    protected $_eventObject = 'seller_reviews_collection';
 
     /**
      * @var string
@@ -31,7 +31,7 @@ class Collection extends AbstractCollection
      */
     protected function _construct()
     {
-        $this->_init('Softserve\Seller\Model\SellerReviews\Sellers', 'Softserve\Seller\Model\SellerReviews\ResourceModel\SellerReviews');
+        $this->_init('Softserve\Seller\Model\SellerReviews\SellerReviews', 'Softserve\Seller\Model\SellerReviews\ResourceModel\SellerReviews');
     }
     /**
      * Set first store flag
@@ -68,17 +68,5 @@ class Collection extends AbstractCollection
     public function getTotalCount()
     {
         return $this->getSize();
-    }
-
-    /**
-     * Get collection filtered by code
-     *
-     * @param int $prodId
-     * @return $this 
-     */
-    public function getByCode($code)
-    {
-        $this->addFilter('code', $code);
-        return $this;
     }
 }   

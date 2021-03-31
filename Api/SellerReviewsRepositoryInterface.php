@@ -4,14 +4,14 @@ namespace Softserve\Seller\Api;
 interface SellerReviewsRepositoryInterface
 {
     /**
-     * Create seller
+     * Create review
      *
-     * @param \Softserve\Seller\Api\Data\SellerReviewsInterface $seller
+     * @param \Softserve\Seller\Api\Data\SellerReviewsInterface $review
      * @param bool
      * @return \Softserve\Seller\Api\Data\SellerReviewsInterface
      * @throws \Magento\Framework\Exception\CouldNotSaveException
      */
-    public function save(\Softserve\Seller\Api\Data\SellerReviewsInterface $seller);
+    public function save(\Softserve\Seller\Api\Data\SellerReviewsInterface $review);
 
     /**
      * Get info about review by review id
@@ -28,11 +28,11 @@ interface SellerReviewsRepositoryInterface
     /**
      * Delete sellerReviews
      *
-     * @param \Softserve\Seller\Api\Data\SellerReviewsInterface $sellerReviews
+     * @param \Softserve\Seller\Api\Data\SellerReviewsInterface $review
      * @return bool Will returned True if deleted
      * @throws \Magento\Framework\Exception\StateException
      */
-    public function delete(\Softserve\Seller\Api\Data\SellerReviewsInterface $sellerReviews);
+    public function delete(\Softserve\Seller\Api\Data\SellerReviewsInterface $review);
 
     /**
      * @param string $id
@@ -46,7 +46,7 @@ interface SellerReviewsRepositoryInterface
      * Get sellerReviews list
      *
      * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
-     * @return \Magento\Catalog\Api\Data\ProductSearchResultsInterface
+     * @return \Magento\Framework\Api\SearchResults
      */
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria);
 }

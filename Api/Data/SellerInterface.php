@@ -1,7 +1,7 @@
 <?php
 namespace Softserve\Seller\Api\Data;
 
-interface SellersInterface
+interface SellerInterface
 {
     /**
      * Seller id

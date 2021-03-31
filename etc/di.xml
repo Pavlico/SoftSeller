@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Softserve\Seller\Api\SellerReviewsRepositoryInterface" type="Softserve\Seller\Model\SellerReviews\SellerReviewsRepository"/>
+    <preference for="Softserve\Seller\Api\Data\SellerReviewsInterface" type="Softserve\Seller\Model\SellerReviews\SellerReviews"/>
+    <preference for="Softserve\Seller\Api\SellerRepositoryInterface" type="Softserve\Seller\Model\Seller\SellerRepository"/>
+    <preference for="Softserve\Seller\Api\Data\SellerInterface" type="Softserve\Seller\Model\Seller\Seller"/>
+</config>
