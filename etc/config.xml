@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <seller>
+            <general_settings>
+                <tab_name>Seller Short Information</tab_name>
+                <review_enabled>0</review_enabled>
+            </general_settings>
+            <advanced_settings>
+                <tab_name>1</tab_name>
+                <api_seller_enabled>1</api_seller_enabled>
+            </advanced_settings>
+        </seller>
+    </default>
+</config>
