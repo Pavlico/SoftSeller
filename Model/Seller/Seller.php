@@ -3,7 +3,7 @@ namespace Softserve\Seller\Model\Seller;
 
 use Softserve\Seller\Api\Data\SellerInterface;
 
-class Seller extends \Magento\Framework\Model\AbstractModel implements SellerInterface
+class Seller extends \Magento\Framework\Model\AbstractExtensibleModel implements SellerInterface
 {
     const SELLER_ID = 'seller_id';
     const CODE = 'code';
@@ -199,5 +199,22 @@ class Seller extends \Magento\Framework\Model\AbstractModel implements SellerInt
     public function setIsEnabled($isEnabled)
     {
         return $this->setData(self::IS_ENABLED, $isEnabled);
+    }
+
+    /**
+     * @return \Softserve\Seller\Api\Data\Data\SellerExtensionInterface|null
+     */
+    public function getExtensionAttributes()
+    {
+        return $this->_getExtensionAttributes();
+    }
+
+    /**
+     * @param \Softserve\Seller\Api\Data\Data\SellerExtensionInterface$extensionAttributes
+     * @return $this
+     */
+    public function setExtensionAttributes(\Softserve\Seller\Api\Data\SellerExtensionInterface $extensionAttributes)
+    {
+        return $this->_setExtensionAttributes($extensionAttributes);
     }
 }

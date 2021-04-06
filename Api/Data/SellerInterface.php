@@ -1,23 +1,8 @@
 <?php
 namespace Softserve\Seller\Api\Data;
 
-interface SellerInterface
+interface SellerInterface extends \Magento\Framework\Api\ExtensibleDataInterface
 {
-    /**
-     * Seller id
-     *
-     * @return int|null
-     */
-    public function getSellerId();
-
-    /**
-     * Set seller id
-     *
-     * @param int $id
-     * @return $this
-     */
-    public function setSellerId($id);
-
     /**
      * Get code
      *
@@ -47,36 +32,6 @@ interface SellerInterface
       * @return $this
       */
      public function setName($name);
-
-    /**
-     * Get link
-     *
-     * @return string
-     */
-    public function getLink();
-
-    /**
-     * Set link
-     *
-     * @param string $link
-     * @return $this
-     */
-    public function setLink($link);
-
-    /**
-     * Get logo
-     *
-     * @return string
-     */
-    public function getLogo();
-
-    /**
-     * Set logo
-     *
-     * @param string $logo
-     * @return $this
-     */
-    public function setLogo($logo);
 
     /**
      * Get description
@@ -109,17 +64,19 @@ interface SellerInterface
     public function setContactInfo($contactInfo);
 
     /**
-     * Get is enabled
+     * Retrieve existing extension attributes object or create a new one.
      *
-     * @return boolean
+     * @return \Softserve\Seller\Api\Data\SellerExtensionInterface|null
      */
-    public function getIsEnabled();
+    public function getExtensionAttributes();
 
     /**
-     * Set is enabled
+     * Set an extension attributes object.
      *
-     * @param string $isEnabled
+     * @param \Softserve\Seller\Api\Data\SellerExtensionInterface $extensionAttributes
      * @return $this
      */
-    public function setIsEnabled($isEnabled);
+    public function setExtensionAttributes(
+        \Softserve\Seller\Api\Data\SellerExtensionInterface $extensionAttributes
+    );
 }

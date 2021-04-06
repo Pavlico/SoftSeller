@@ -4,4 +4,8 @@
     <preference for="Softserve\Seller\Api\Data\SellerReviewsInterface" type="Softserve\Seller\Model\SellerReviews\SellerReviews"/>
     <preference for="Softserve\Seller\Api\SellerRepositoryInterface" type="Softserve\Seller\Model\Seller\SellerRepository"/>
     <preference for="Softserve\Seller\Api\Data\SellerInterface" type="Softserve\Seller\Model\Seller\Seller"/>
+    <type name="Magento\Catalog\Api\ProductRepositoryInterface">
+        <plugin name="seller_extensions"
+                type="Softserve\Seller\Model\Plugin\Product\Repository"/>
+    </type>
 </config>

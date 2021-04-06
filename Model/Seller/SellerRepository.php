@@ -50,7 +50,7 @@ class SellerRepository implements SellerRepositoryInterface
      * Get code by id
      *
      * @param string $id
-     * @return \Softserve\Seller\Model\Seller\Seller
+     * @return \Softserve\Seller\Api\Data\SellerInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getById($id)
@@ -67,12 +67,16 @@ class SellerRepository implements SellerRepositoryInterface
      * Get seller by code
      *
      * @param string $seller
-     * @return Softserve\Seller\Model\Seller\Seller
+     * @return \Softserve\Seller\Api\Data\SellerInterface
      */
     public function get($code)
     {
         $sellerCollection = $this->collectionFactory->create();
         $sellerCollection->getByCode($code);
+        if ($sellerCollection->getSize()) {
+            return $sellerCollection->getFirstItem();
+        }
+        throw new NoSuchEntityException(__('Unable to find seller with code "%1"', $code));
         return $sellerCollection;
     }
      
