@@ -1,9 +1,9 @@
 <?php
-namespace Softserve\Seller\Model\Seller;
+namespace Softserve\Seller\Model\Codes;
 
-use Softserve\Seller\Api\Data\SellerInterface;
+use Softserve\Seller\Api\Data\SellersInterface;
 
-class Seller extends \Magento\Framework\Model\AbstractExtensibleModel implements SellerInterface
+class Sellers extends \Magento\Framework\Model\AbstractModel implements SellersInterface
 {
     const SELLER_ID = 'seller_id';
     const CODE = 'code';
@@ -17,21 +17,21 @@ class Seller extends \Magento\Framework\Model\AbstractExtensibleModel implements
     /**
      * @var string
      */
-    protected $_cacheTag = 'Seller';
+    protected $_cacheTag = 'Sellers';
 
     /**
      * Prefix of model events names.
      *
      * @var string
      */
-    protected $_eventPrefix = 'Seller';
+    protected $_eventPrefix = 'Sellers';
 
     /**
      * Initialize resource model.
      */
     protected function _construct()
     {
-        $this->_init('Softserve\Seller\Model\Seller\ResourceModel\Seller');
+        $this->_init('Softserve\Seller\Model\Sellers\ResourceModel\Sellers');
     }
 
     /**
@@ -181,7 +181,7 @@ class Seller extends \Magento\Framework\Model\AbstractExtensibleModel implements
     }
 
     /**
-     * Get enabled seller
+     * Get enabled sellers
      *
      * @return string
      */
@@ -199,22 +199,5 @@ class Seller extends \Magento\Framework\Model\AbstractExtensibleModel implements
     public function setIsEnabled($isEnabled)
     {
         return $this->setData(self::IS_ENABLED, $isEnabled);
-    }
-
-    /**
-     * @return \Softserve\Seller\Api\Data\Data\SellerExtensionInterface|null
-     */
-    public function getExtensionAttributes()
-    {
-        return $this->_getExtensionAttributes();
-    }
-
-    /**
-     * @param \Softserve\Seller\Api\Data\Data\SellerExtensionInterface$extensionAttributes
-     * @return $this
-     */
-    public function setExtensionAttributes(\Softserve\Seller\Api\Data\SellerExtensionInterface $extensionAttributes)
-    {
-        return $this->_setExtensionAttributes($extensionAttributes);
     }
 }

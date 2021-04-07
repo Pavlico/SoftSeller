@@ -97,7 +97,7 @@ class SellerRepository implements SellerRepositoryInterface
     }
      
     /**
-     * Delete code
+     * Delete seller
      *
      * @param Softserve\Seller\Api\Data\SellerInterface
      * @return bool Will returned True if deleted
@@ -108,7 +108,7 @@ class SellerRepository implements SellerRepositoryInterface
         $seller = $this->sellerFactory->create();
         $seller->getResource()->delete($seller);
         if ($seller->getSellerId()) {
-            throw new StateException(__('Unable to delete code'));
+            throw new StateException(__('Unable to delete seller'));
         }
         return true;
     }

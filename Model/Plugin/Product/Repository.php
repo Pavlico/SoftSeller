@@ -31,12 +31,12 @@ class Repository
      */
     public function __construct(
         \Magento\Catalog\Api\Data\ProductExtensionFactory $productExtensionFactory,
-        \Softserve\Seller\Api\SellerRepositoryInterface $sellerInterface,
+        \Softserve\Seller\Api\SellerProductRepositoryInterface $sellerProductInterface,
         \Softserve\Seller\Helper\Configuration $configuration,
         \Magento\Catalog\Model\ResourceModel\ProductFactory $productFactory
     ) {
         $this->productExtensionFactory = $productExtensionFactory;
-        $this->sellerInterface = $sellerInterface;
+        $this->sellerProductInterface = $sellerProductInterface;
         $this->configuration = $configuration;
         $this->productFactory = $productFactory;
     }
@@ -92,7 +92,7 @@ class Repository
         $poductReource = $this->productFactory->create();
         $attribute = $poductReource->getAttribute('seller');
         $optionId = $product->getCustomAttribute('seller')->getValue();
-        $seller = $this->sellerInterface->get($attribute->getSource()->getOptionText($optionId));
+        $seller = $this->sellerProductInterface->get($attribute->getSource()->getOptionText($optionId));
         $extensionAttributes->setSeller($seller);
         $product->setExtensionAttributes($extensionAttributes);
         return $this;
