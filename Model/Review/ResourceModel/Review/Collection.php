@@ -1,5 +1,5 @@
 <?php
-namespace Softserve\Seller\Model\SellerReviews\ResourceModel\SellerReviews;
+namespace Softserve\Seller\Model\Review\ResourceModel\Review;
 
 use Magento\Cms\Model\ResourceModel\AbstractCollection;
 
@@ -31,7 +31,7 @@ class Collection extends AbstractCollection
      */
     protected function _construct()
     {
-        $this->_init('Softserve\Seller\Model\SellerReviews\SellerReviews', 'Softserve\Seller\Model\SellerReviews\ResourceModel\SellerReviews');
+        $this->_init('Softserve\Seller\Model\Review\Review', 'Softserve\Seller\Model\Review\ResourceModel\Review');
     }
     /**
      * Set first store flag

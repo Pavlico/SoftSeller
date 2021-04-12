@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Softserve_Seller::seller" title="Seller" module="Softserve_Seller" sortOrder="10" resource="Softserve_Seller::seller"/>
+        <add id="Softserve_Seller::seller_list" title="Seller list" module="Softserve_Seller" sortOrder="10" action="seller/sellers" resource="Softserve_Seller::seller_list" parent="Softserve_Seller::seller"/>
+        <add id="Softserve_Seller::review_lists" title="Seller reviews" module="Softserve_Seller" sortOrder="20" action="seller/reviews" resource="Softserve_Seller::review_lists" parent="Softserve_Seller::seller"/>
+    </menu>
+</config>

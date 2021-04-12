@@ -1,7 +1,7 @@
 <?php
-namespace Softserve\Seller\Model\SellerReviews\ResourceModel;
+namespace Softserve\Seller\Model\Review\ResourceModel;
 
-class SellerReviews extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+class Review extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
     /**
      * @var string
@@ -9,7 +9,7 @@ class SellerReviews extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     protected $_idFieldName = 'review_id';
 
     /**
-     * @var \Softserve\Seller\Model\SellerReviews\ResourceModel\SellerReviews\CollectionFactory
+     * @var \Softserve\Seller\Model\Review\ResourceModel\Review\CollectionFactory
      */
     protected $sellerCollection;
 
@@ -17,16 +17,16 @@ class SellerReviews extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * Construct.
      *
      * @param \Magento\Framework\Model\ResourceModel\Db\Context $context
-     * @param \Softserve\Seller\Model\SellerReviews\ResourceModel\SellerReviews\CollectionFactory $sellerReviewsCollection
+     * @param \Softserve\Seller\Model\Review\ResourceModel\Review\CollectionFactory $reviewCollection
      * @param string|null $resourcePrefix
      */
     public function __construct(
         \Magento\Framework\Model\ResourceModel\Db\Context $context,
-        \Softserve\Seller\Model\SellerReviews\ResourceModel\SellerReviews\CollectionFactory $sellerReviewsCollection,
+        \Softserve\Seller\Model\Review\ResourceModel\Review\CollectionFactory $reviewCollection,
         $resourcePrefix = null
     ) {
         parent::__construct($context, $resourcePrefix);
-        $this->sellerReviewsCollection = $sellerReviewsCollection;
+        $this->reviewCollection = $reviewCollection;
     }
 
     /**

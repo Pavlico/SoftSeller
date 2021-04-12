@@ -1,20 +1,20 @@
 <?php
-namespace Softserve\Seller\Model\SellerReviews;
+namespace Softserve\Seller\Model\Review;
 
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\StateException;
-use Softserve\Seller\Api\SellerReviewsRepositoryInterface;
+use Softserve\Seller\Api\ReviewRepositoryInterface;
 
-class SellerReviewsRepository implements SellerReviewsRepositoryInterface
+class ReviewRepository implements ReviewRepositoryInterface
 {
     /**
-     * @var \Softserver\Seller\Model\SellerReviews\SellerReviewsFactory 
+     * @var \Softserver\Seller\Model\Review\ReviewFactory 
      */
-    protected $sellerReviewsFactory;
+    protected $reviewFactory;
 
     /**
-     * @var \Softserve\Seller\Model\SellerReviews\ResourceModel\SellerReviews\CollectionFactory
+     * @var \Softserve\Seller\Model\Review\ResourceModel\Review\CollectionFactory
      */
     protected $collectionFactory;
 
@@ -29,18 +29,18 @@ class SellerReviewsRepository implements SellerReviewsRepositoryInterface
     protected $collectionProcessor;
 
     /**
-     * @param \Softserver\Seller\Model\SellerReviews\SellerReviewsFactory $sellerReviewsFactory
-     * @param \Softserve\Seller\Model\SellerReviews\ResourceModel\SellerReviews\CollectionFactory $collectionFactory
+     * @param \Softserver\Seller\Model\Review\ReviewFactory $reviewFactory
+     * @param \Softserve\Seller\Model\Review\ResourceModel\Review\CollectionFactory $collectionFactory
      * @param \Magento\Framework\Api\SearchResultsInterface $searchResults
      * @param \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
      */
     public function __construct(
-        \Softserve\Seller\Model\SellerReviews\SellerReviewsFactory $sellerReviewsFactory,
-        \Softserve\Seller\Model\SellerReviews\ResourceModel\SellerReviews\CollectionFactory $collectionFactory,
+        \Softserve\Seller\Model\Review\ReviewFactory $reviewFactory,
+        \Softserve\Seller\Model\Review\ResourceModel\Review\CollectionFactory $collectionFactory,
         \Magento\Framework\Api\SearchResultsInterface $searchResults,
         \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
     ) {
-        $this->sellerReviewsFactory = $sellerReviewsFactory;
+        $this->reviewFactory = $reviewFactory;
         $this->collectionFactory = $collectionFactory;
         $this->searchResults = $searchResults;
         $this->collectionProcessor = $collectionProcessor;
@@ -50,47 +50,47 @@ class SellerReviewsRepository implements SellerReviewsRepositoryInterface
      * Get review by id
      *
      * @param string $id
-     * @return \Softserve\Seller\Model\SellerReviews\SellerReviews
+     * @return \Softserve\Seller\Model\Review\Review
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getById($id)
     {
-        $sellerReviews = $this->sellerReviewsFactory->create();
-        $sellerReviews->getResource()->load($sellerReviews, $id);
-        if (!$sellerReviews->getId()) {
+        $review = $this->reviewFactory->create();
+        $review->getResource()->load($review, $id);
+        if (!$review->getId()) {
             throw new NoSuchEntityException(__('Unable to find seller with ID "%1"', $id));
         }
-        return $sellerReviews;
+        return $review;
     }
      
     /**
      * Save Seller
      *
-     * @param Softserve\Seller\Api\Data\SellerReviewsInterface
+     * @param Softserve\Seller\Api\Data\ReviewInterface
      * @return bool Will returned True if saved
      */
-    public function save(\Softserve\Seller\Api\Data\SellerReviewsInterface $review)
+    public function save(\Softserve\Seller\Api\Data\ReviewInterface $review)
     {
-        $sellerReviews = $this->sellerReviewsFactory->create();
-        $sellerReviews->getResource()->save($review);
-        if (!$sellerReviews->getSellerId()) {
+        $review = $this->reviewFactory->create();
+        $review->getResource()->save($review);
+        if (!$review->getSellerId()) {
             throw new CouldNotSaveException(__('Unable to save code'));
         }
-        return $sellerReviews;
+        return $review;
     }
      
     /**
      * Delete code
      *
-     * @param Softserve\Seller\Api\Data\SellerReviewsInterface
+     * @param Softserve\Seller\Api\Data\ReviewInterface
      * @return bool Will returned True if deleted
      * @throws \Magento\Framework\Exception\StateException
      */
-    public function delete(\Softserve\Seller\Api\Data\SellerReviewsInterface $review)
+    public function delete(\Softserve\Seller\Api\Data\ReviewInterface $review)
     {
-        $sellerReviews = $this->sellerReviewsFactory->create();
-        $sellerReviews->getResource()->delete($review);
-        if ($sellerReviews->getReviewId()) {
+        $review = $this->reviewFactory->create();
+        $review->getResource()->delete($review);
+        if ($review->getReviewId()) {
             throw new StateException(__('Unable to delete review'));
         }
         return true;
@@ -104,13 +104,13 @@ class SellerReviewsRepository implements SellerReviewsRepositoryInterface
      */
     public function deleteById($id)
     {
-        $sellerReviews = $this->sellerReviewsFactory->create();
-        $sellerReviews->getResource()->load($sellerReviews, $id);
-        if (!$sellerReviews->getReviewId()) {
+        $review = $this->reviewFactory->create();
+        $review->getResource()->load($review, $id);
+        if (!$review->getReviewId()) {
             throw new NoSuchEntityException(__('Unable to find review with ID "%1"', $id));
         }
-        $sellerReviews->getResource()->delete($sellerReviews);
-        if ($sellerReviews->getReviewId()) {
+        $review->getResource()->delete($review);
+        if ($review->getReviewId()) {
             throw new StateException(__('Unable to delete review'));
         }
         return true;

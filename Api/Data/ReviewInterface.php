@@ -1,7 +1,7 @@
 <?php
 namespace Softserve\Seller\Api\Data;
 
-interface SellerReviewsInterface
+interface ReviewInterface
 {
     /**
      * Review id

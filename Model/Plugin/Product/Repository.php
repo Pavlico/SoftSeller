@@ -91,10 +91,13 @@ class Repository
         }
         $poductReource = $this->productFactory->create();
         $attribute = $poductReource->getAttribute('seller');
-        $optionId = $product->getCustomAttribute('seller')->getValue();
-        $seller = $this->sellerProductInterface->get($attribute->getSource()->getOptionText($optionId));
-        $extensionAttributes->setSeller($seller);
-        $product->setExtensionAttributes($extensionAttributes);
+        $productAttrSeller = $product->getCustomAttribute('seller');
+        if ($productAttrSeller) {
+            $optionId = $productAttrSeller->getValue();
+            $seller = $this->sellerProductInterface->get($attribute->getSource()->getOptionText($optionId));
+            $extensionAttributes->setSeller($seller);
+            $product->setExtensionAttributes($extensionAttributes);
+        }
         return $this;
     }
 }
