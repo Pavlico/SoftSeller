@@ -1,17 +1,17 @@
 <?php
 namespace Softserve\Seller\Api;
 
-interface SellerReviewsRepositoryInterface
+interface ReviewRepositoryInterface
 {
     /**
      * Create review
      *
-     * @param \Softserve\Seller\Api\Data\SellerReviewsInterface $review
+     * @param \Softserve\Seller\Api\Data\ReviewInterface $review
      * @param bool
-     * @return \Softserve\Seller\Api\Data\SellerReviewsInterface
+     * @return \Softserve\Seller\Api\Data\ReviewInterface
      * @throws \Magento\Framework\Exception\CouldNotSaveException
      */
-    public function save(\Softserve\Seller\Api\Data\SellerReviewsInterface $review);
+    public function save(\Softserve\Seller\Api\Data\ReviewInterface $review);
 
     /**
      * Get info about review by review id
@@ -20,19 +20,19 @@ interface SellerReviewsRepositoryInterface
      * @param bool $editMode
      * @param int|null $storeId
      * @param bool $forceReload
-     * @return \Softserve\Seller\Api\Data\SellerReviewsInterface
+     * @return \Softserve\Seller\Api\Data\ReviewInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getById($reviewId);
 
     /**
-     * Delete sellerReviews
+     * Delete review
      *
-     * @param \Softserve\Seller\Api\Data\SellerReviewsInterface $review
+     * @param \Softserve\Seller\Api\Data\ReviewInterface $review
      * @return bool Will returned True if deleted
      * @throws \Magento\Framework\Exception\StateException
      */
-    public function delete(\Softserve\Seller\Api\Data\SellerReviewsInterface $review);
+    public function delete(\Softserve\Seller\Api\Data\ReviewInterface $review);
 
     /**
      * @param string $id
@@ -43,7 +43,7 @@ interface SellerReviewsRepositoryInterface
     public function deleteById($id);
 
     /**
-     * Get sellerReviews list
+     * Get review list
      *
      * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
      * @return \Magento\Framework\Api\SearchResults

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_code:etc/code_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">seller_form_edit.seller_form_edit_data_source</item>
+            <item name="deps" xsi:type="string">seller_form_edit.seller_form_edit_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Seller Information</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">seller_form_edit_data_source</item>
+        </item>
+        <item name="layout" xsi:type="array">
+            <item name="type" xsi:type="string">tabs</item>
+            <item name="navConteinerName" xsi:type="string">left</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="backButton" xsi:type="array">
+                <item name="name" xsi:type="string">back</item>
+                <item name="label" xsi:type="string" translate="true">Back</item>
+                <item name="class" xsi:type="string">back</item>
+                <item name="url" xsi:type="string">*/*/index</item>
+            </item>
+            <item name="save" xsi:type="array">
+                <item name="name" xsi:type="string">save</item>
+                <item name="label" xsi:type="string" translate="true">Save</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">*/*/save</item>
+            </item>
+            <!-- <item name="save" xsi:type="string">Softserve\Seller\Block\Adminhtml\Form\Edit\SaveButton</item> -->
+        </item>
+    </argument>
+    <dataSource name="seller_form_edit_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Softserve\Seller\Ui\Component\Form\Sellers\DataProvider</argument>
+            <argument name="name" xsi:type="string">seller_form_edit_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">seller_id</argument>
+            <argument name="requestFieldName" xsi:type="string">seller_id</argument>
+            <argument name="collectionFactory" xsi:type="object">Softserve\Seller\Model\Seller\ResourceModel\Seller\CollectionFactory</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="*/*/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+        <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">General</item>
+                <item name="sortOrder" xsi:type="number">10</item>
+            </item>
+        </argument>
+        <field name="seller_id" sortOrder="10" formElement="input">
+            <settings>
+                <dataScope>seller_id</dataScope>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="name" sortOrder="10" formElement="input">
+            <settings>
+                <dataScope>name</dataScope>
+                <visible>true</visible>
+                <dataType>string</dataType>
+                <label translate="true">Name</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="code" sortOrder="20" formElement="input">
+            <settings>
+                <dataScope>code</dataScope>
+                <visible>true</visible>
+                <dataType>string</dataType>
+                <label translate="true">Code</label>
+                <disabled>true</disabled>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="link" sortOrder="30" formElement="input">
+            <settings>
+                <dataScope>link</dataScope>
+                <visible>true</visible>
+                <dataType>string</dataType>
+                <label translate="true">Link</label>
+                <disabled>true</disabled>
+                <validation>
+                    <rule name="validate-url" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="logo" sortOrder="40" formElement="imageUploader">
+            <settings>
+                <label translate="true">Logo</label>
+                <componentType>imageUploader</componentType>
+            </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <allowedExtensions>jpg jpeg gif png</allowedExtensions>
+                        <maxFileSize>2097152</maxFileSize>
+                        <uploaderConfig>
+                            <param xsi:type="string" name="url">*/*/uploadlogo</param>
+                        </uploaderConfig>
+                    </settings>
+                </imageUploader>
+            </formElements>
+        </field>
+        <field name="description" sortOrder="50" formElement="textarea">
+            <settings>
+                <dataScope>description</dataScope>
+                <visible>true</visible>
+                <dataType>string</dataType>
+                <label translate="true">Description</label>
+            </settings>
+        </field>
+        <field name="contact_info" sortOrder="60" formElement="textarea">
+            <settings>
+                <dataScope>contact_info</dataScope>
+                <visible>true</visible>
+                <dataType>string</dataType>
+                <label translate="true">Contact info</label>
+            </settings>
+        </field>
+        <field name="is_enabled" sortOrder="70" formElement="select">
+            <settings>
+                <notice>Normally i would do it as checkbox but task required to do select</notice>
+                <dataType>boolean</dataType>
+                <label translate="true">Is enabled</label>
+                <dataScope>is_enabled</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options>
+                            <option name="0" xsi:type="array">
+                                <item name="value" xsi:type="string">0</item>
+                                <item name="label" xsi:type="string">No</item>
+                            </option>
+                            <option name="1" xsi:type="array">
+                                <item name="value" xsi:type="string">1</item>
+                                <item name="label" xsi:type="string">Yes</item>
+                            </option>
+                        </options>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

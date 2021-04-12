@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="Softserve\Seller\Api\SellerReviewsRepositoryInterface" type="Softserve\Seller\Model\SellerReviews\SellerReviewsRepository"/>
-    <preference for="Softserve\Seller\Api\Data\SellerReviewsInterface" type="Softserve\Seller\Model\SellerReviews\SellerReviews"/>
+    <preference for="Softserve\Seller\Api\ReviewRepositoryInterface" type="Softserve\Seller\Model\Review\ReviewRepository"/>
+    <preference for="Softserve\Seller\Api\Data\ReviewInterface" type="Softserve\Seller\Model\Review\Review"/>
     <preference for="Softserve\Seller\Api\SellerRepositoryInterface" type="Softserve\Seller\Model\Seller\SellerRepository"/>
     <preference for="Softserve\Seller\Api\Data\SellerInterface" type="Softserve\Seller\Model\Seller\Seller"/>
     <preference for="Softserve\Seller\Api\Data\SellerProductInterface" type="Softserve\Seller\Model\SellerProduct\SellerProduct"/>
@@ -9,5 +9,57 @@
     <type name="Magento\Catalog\Api\ProductRepositoryInterface">
         <plugin name="seller_extensions"
                 type="Softserve\Seller\Model\Plugin\Product\Repository"/>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="seller_listing_data_source" xsi:type="string">Softserve\Seller\Model\Seller\ResourceModel\Seller\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Softserve\Seller\Model\Seller\ResourceModel\Seller\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">seller</argument>
+            <argument name="eventPrefix" xsi:type="string">seller_collection</argument>
+            <argument name="eventObject" xsi:type="string">seller_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Softserve\Seller\Model\Seller\ResourceModel\Seller</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="seller_review_listing_data_source" xsi:type="string">Softserve\Seller\Model\Review\ResourceModel\Review\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Softserve\Seller\Model\Review\ResourceModel\Review\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">seller_reviews</argument>
+            <argument name="eventPrefix" xsi:type="string">review_collection</argument>
+            <argument name="eventObject" xsi:type="string">review_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Softserve\Seller\Model\Review\ResourceModel\Review</argument>
+        </arguments>
+    </type>
+    <virtualType name="Softserve\Seller\UploadLogo" type="Softserve\Seller\Model\Image\ImageUploader">
+        <arguments>
+                <argument name="baseTmpPath" xsi:type="string">seller/tmp</argument>
+                <argument name="basePath" xsi:type="string">seller</argument>
+                <argument name="allowedExtensions" xsi:type="array">
+                    <item name="jpg" xsi:type="string">jpg</item>
+                    <item name="jpeg" xsi:type="string">jpeg</item>
+                    <item name="gif" xsi:type="string">gif</item>
+                    <item name="png" xsi:type="string">png</item>
+                </argument>
+        </arguments>
+    </virtualType>
+    <type name="Softserve\Seller\Controller\Adminhtml\Sellers\UploadLogo">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Softserve\Seller\UploadLogo</argument>
+        </arguments>
+    </type>
+    <type name="Softserve\Seller\Controller\Adminhtml\Sellers\Save">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Softserve\Seller\UploadLogo</argument>
+        </arguments>
     </type>
 </config>

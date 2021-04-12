@@ -1,9 +1,9 @@
 <?php
-namespace Softserve\Seller\Model\Codes;
+namespace Softserve\Seller\Model\Seller;
 
-use Softserve\Seller\Api\Data\SellersInterface;
+use Softserve\Seller\Api\Data\SellerInterface;
 
-class Sellers extends \Magento\Framework\Model\AbstractModel implements SellersInterface
+class Seller extends \Magento\Framework\Model\AbstractModel implements SellerInterface
 {
     const SELLER_ID = 'seller_id';
     const CODE = 'code';
@@ -17,21 +17,21 @@ class Sellers extends \Magento\Framework\Model\AbstractModel implements SellersI
     /**
      * @var string
      */
-    protected $_cacheTag = 'Sellers';
+    protected $_cacheTag = 'Seller';
 
     /**
      * Prefix of model events names.
      *
      * @var string
      */
-    protected $_eventPrefix = 'Sellers';
+    protected $_eventPrefix = 'Seller';
 
     /**
      * Initialize resource model.
      */
     protected function _construct()
     {
-        $this->_init('Softserve\Seller\Model\Sellers\ResourceModel\Sellers');
+        $this->_init('Softserve\Seller\Model\Seller\ResourceModel\Seller');
     }
 
     /**
@@ -181,7 +181,7 @@ class Sellers extends \Magento\Framework\Model\AbstractModel implements SellersI
     }
 
     /**
-     * Get enabled sellers
+     * Get enabled seller
      *
      * @return string
      */

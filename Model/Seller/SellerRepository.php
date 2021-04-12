@@ -88,14 +88,22 @@ class SellerRepository implements SellerRepositoryInterface
      */
     public function save(\Softserve\Seller\Api\Data\SellerInterface $seller)
     {
-        $seller = $this->sellerFactory->create();
-        $seller->getResource()->save($seller);
+        $seller = $this->sellerFactory->create()->getResource();
+        $sellerId = $seller->getSellerId();
+        ;
+        if ($sellerId && $existingSeller = $this->getById($sellerId)) {
+            foreach ($seller as $key => $value) {
+                $existingSeller->setData($key, $value);
+            }
+            $seller = $existingSeller;
+        }
+        $seller->save($seller);
         if (!$seller->getSellerId()) {
-            throw new CouldNotSaveException(__('Unable to save code'));
+            throw new CouldNotSaveException(__('Unable to save seller'));
         }
         return $seller;
     }
-     
+
     /**
      * Delete seller
      *

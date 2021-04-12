@@ -1,9 +1,9 @@
 <?php
-namespace Softserve\Seller\Model\SellerReviews;
+namespace Softserve\Seller\Model\Review;
 
-use Softserve\Seller\Api\Data\SellerReviewsInterface;
+use Softserve\Seller\Api\Data\ReviewInterface;
 
-class SellerReviews extends \Magento\Framework\Model\AbstractModel implements SellerReviewsInterface
+class Review extends \Magento\Framework\Model\AbstractModel implements ReviewInterface
 {
     const REVIEW_ID = 'review_id';
     const SELLER_ID = 'seller_id';
@@ -17,21 +17,21 @@ class SellerReviews extends \Magento\Framework\Model\AbstractModel implements Se
     /**
      * @var string
      */
-    protected $_cacheTag = 'SellerReviews';
+    protected $_cacheTag = 'Review';
 
     /**
      * Prefix of model events names.
      *
      * @var string
      */
-    protected $_eventPrefix = 'SellerReviews';
+    protected $_eventPrefix = 'Review';
 
     /**
      * Initialize resource model.
      */
     protected function _construct()
     {
-        $this->_init('Softserve\Seller\Model\SellerReviews\ResourceModel\SellerReviews');
+        $this->_init('Softserve\Seller\Model\Review\ResourceModel\Review');
     }
 
     /**
