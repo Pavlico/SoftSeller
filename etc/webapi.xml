@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
-    <route method="GET" url="/V1/seller/:id">
+    <route method="GET" url="/V1/seller/sellerId/:sellerId">
         <service class="Softserve\Seller\Api\SellerRepositoryInterface" method="getById"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>
     </route>
-    <route method="GET" url="/V1/seller/:code">
+    <route method="GET" url="/V1/seller/code/:code">
         <service class="Softserve\Seller\Api\SellerRepositoryInterface" method="get"/>
         <resources>
             <resource ref="anonymouns"/>
@@ -18,7 +18,7 @@
             <resource ref="anonymous"/>
         </resources>
     </route>
-    <route method="PUT" url="/V1/seller/:id">
+    <route method="PUT" url="/V1/seller/:sellerId">
         <service class="Softserve\Seller\Api\SellerRepositoryInterface" method="save"/>
         <resources>
             <resource ref="anonymous"/>
@@ -26,6 +26,12 @@
     </route>
     <route method="DELETE" url="/V1/seller">
         <service class="Softserve\Seller\Api\SellerRepositoryInterface" method="delete"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route method="DELETE" url="/V1/seller/:sellerId">
+        <service class="Softserve\Seller\Api\SellerRepositoryInterface" method="deleteById"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>
