@@ -44,12 +44,12 @@ interface SellerRepositoryInterface
     public function delete(\Softserve\Seller\Api\Data\SellerInterface $seller);
 
     /**
-     * @param string $id
+     * @param string $sellerId
      * @return bool Will returned True if deleted
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\StateException
      */
-    public function deleteById($id);
+    public function deleteById($sellerId);
 
     /**
      * Get seller list

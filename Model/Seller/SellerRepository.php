@@ -38,12 +38,18 @@ class SellerRepository implements SellerRepositoryInterface
         \Softserve\Seller\Model\Seller\SellerFactory $sellerFactory,
         \Softserve\Seller\Model\Seller\ResourceModel\Seller\CollectionFactory $collectionFactory,
         \Magento\Framework\Api\SearchResultsInterface $searchResults,
-        \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
+        \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor,
+        \Magento\Framework\App\State $state,
+        \Softserve\Seller\Helper\Configuration $configuration,
+        \Magento\Framework\App\RequestInterface $request
     ) {
         $this->sellerFactory = $sellerFactory;
         $this->collectionFactory = $collectionFactory;
         $this->searchResults = $searchResults;
         $this->collectionProcessor = $collectionProcessor;
+        $this->state = $state;
+        $this->configuration = $configuration;
+        $this->request = $request;
     }
 
     /**
@@ -55,6 +61,9 @@ class SellerRepository implements SellerRepositoryInterface
      */
     public function getById($id)
     {
+        if (!$this->validate()) {
+            throw new CouldNotSaveException(__('Not enabled by module config'));
+        }
         $seller = $this->sellerFactory->create();
         $seller->getResource()->load($seller, $id);
         if (!$seller->getId()) {
@@ -71,6 +80,9 @@ class SellerRepository implements SellerRepositoryInterface
      */
     public function get($code)
     {
+        if (!$this->validate()) {
+            throw new CouldNotSaveException(__('Not enabled by module config'));
+        }
         $sellerCollection = $this->collectionFactory->create();
         $sellerCollection->getByCode($code);
         if ($sellerCollection->getSize()) {
@@ -84,20 +96,23 @@ class SellerRepository implements SellerRepositoryInterface
      * Save Seller
      *
      * @param Softserve\Seller\Api\Data\SellerInterface
-     * @return bool Will returned True if saved
+     * @return Softserve\Seller\Api\Data\SellerInterface
      */
     public function save(\Softserve\Seller\Api\Data\SellerInterface $seller)
     {
-        $seller = $this->sellerFactory->create()->getResource();
-        $sellerId = $seller->getSellerId();
-        ;
-        if ($sellerId && $existingSeller = $this->getById($sellerId)) {
-            foreach ($seller as $key => $value) {
-                $existingSeller->setData($key, $value);
-            }
-            $seller = $existingSeller;
+        if (!$this->validate()) {
+            throw new CouldNotSaveException(__('Not enabled by module config'));
         }
-        $seller->save($seller);
+        $sellerResource = $this->sellerFactory->create()->getResource();
+        $sellerId = $seller->getSellerId();
+        try {
+            if ($sellerId && $existingSeller = $this->getById($sellerId)) {
+                $existingSeller->setData($seller->getData());
+                $seller = $existingSeller;
+            }        
+        } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
+        }
+        $sellerResource->save($seller);
         if (!$seller->getSellerId()) {
             throw new CouldNotSaveException(__('Unable to save seller'));
         }
@@ -113,8 +128,11 @@ class SellerRepository implements SellerRepositoryInterface
      */
     public function delete(\Softserve\Seller\Api\Data\SellerInterface $seller)
     {
-        $seller = $this->sellerFactory->create();
-        $seller->getResource()->delete($seller);
+        if (!$this->validate()) {
+            throw new CouldNotSaveException(__('Not enabled by module config'));
+        }
+        $sellerResource = $this->sellerFactory->create();
+        $sellerResource->getResource()->delete($seller);
         if ($seller->getSellerId()) {
             throw new StateException(__('Unable to delete seller'));
         }
@@ -122,22 +140,22 @@ class SellerRepository implements SellerRepositoryInterface
     }
 
     /**
-     * @param string $id
+     * @param string $sellerId
      * @return bool Will returned True if deleted
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\StateException
      */
-    public function deleteById($id)
+    public function deleteById($sellerId)
     {
+        if (!$this->validate()) {
+            throw new CouldNotSaveException(__('Not enabled by module config'));
+        }
         $seller = $this->sellerFactory->create();
-        $seller->getResource()->load($seller, $id);
+        $seller->getResource()->load($seller, $sellerId);
         if (!$seller->getSellerId()) {
-            throw new NoSuchEntityException(__('Unable to find seller with ID "%1"', $id));
+            throw new NoSuchEntityException(__('Unable to find seller with ID "%1"', $sellerId));
         }
-        $seller->getResource()->delete($seller);
-        if ($seller->getSellerId()) {
-            throw new StateException(__('Unable to delete seller'));
-        }
+        $seller->delete($seller);
         return true;
     }
 
@@ -157,5 +175,21 @@ class SellerRepository implements SellerRepositoryInterface
         $this->searchResults->setItems($collection->getItems());
         $this->searchResults->setTotalCount($collection->getSize());
         return $this->searchResults;
+    }
+    
+    /**
+     * Validate for api request and check if config enables it
+     * @return bool
+     */
+    private function validate()
+    {
+        $area = $this->state->getAreaCode();
+        if (($area == \Magento\Framework\App\Area::AREA_WEBAPI_REST ||
+            $area == \Magento\Framework\App\Area::AREA_WEBAPI_REST) &&
+            !$this->configuration->getApiEnabled()
+        ) {
+            return false;
+        }
+        return true;
     }
 }
