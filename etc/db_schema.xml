@@ -20,7 +20,7 @@
         <column xsi:type="text" name="rate" comment="Rate"/>
         <column xsi:type="text" name="title" comment="Title"/>
         <column xsi:type="text" name="message" comment="Message"/>
-        <column xsi:type="boolean" name="is_confirmed" comment="Is confirmed"/>
+        <column xsi:type="boolean" name="is_confirmed" comment="Is confirmed" default="0"/>
         <column xsi:type="text" name="created_at" comment="Created at"/>
         <column xsi:type="text" name="updated_at" comment="Updated at"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">

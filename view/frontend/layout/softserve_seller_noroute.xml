@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="main">
+            <block name="sellers.no.route" class="Magento\Framework\View\Element\Template" template="Softserve_Seller::no_route.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

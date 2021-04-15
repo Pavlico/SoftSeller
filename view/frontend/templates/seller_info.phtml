@@ -1,0 +1,16 @@
+<?php
+/**
+ * @see \Softserve\Seller\Block\Sellers\SellerDetails
+ */
+
+$seller = $block->getSellerInfo();
+$url = $this->helper('\Magento\Cms\Helper\Wysiwyg\Images')->getBaseUrl();
+?>
+
+<div class="seller-info">
+    <div><span><?= $seller->getName();?></span></div>
+    <div><span><?= $seller->getCode();?></span></div>
+    <img src="<?= $escaper->escapeUrl($url . 'seller/' . $seller->getLogo());?>">
+    <div><span><?= substr($seller->getDescription(), 0, 100);?></span></div>
+    <div><a href="<?= $escaper->escapeUrl('softserve/sellers/' . $seller->getCode())?>"><?=__('Seller site') ?></a></div>
+</div>

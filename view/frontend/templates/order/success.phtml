@@ -1,0 +1,19 @@
+<?php
+/**
+ * @see \Magento\Checkout\Block\Onepage\Success
+ */
+
+$sellers = $block->getViewModel()->getSellers();
+$url = $this->helper('\Magento\Cms\Helper\Wysiwyg\Images')->getBaseUrl();
+?>
+<div class="sellers">
+    <?php foreach ($sellers as $seller): ?>
+        <div class="seller-info">
+            <div><span><?= $seller->getName();?></span></div>
+            <div><span><?= $seller->getCode();?></span></div>
+            <img src="<?= $escaper->escapeUrl($url . 'seller/' . $seller->getLogo());?>">
+            <div><span><?= substr($seller->getDescription(), 0, 100);?></span></div>
+            <div><a href="<?= $escaper->escapeUrl('softserve/sellers/' . $seller->getCode())?>"><?=__('Seller site') ?></a></div>
+        </div>
+    <?php endforeach; ?>
+</div>

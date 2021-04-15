@@ -1,0 +1,41 @@
+<?php
+/**
+ * @see \Softserve\Seller\Block\Sellers\SellerDetails
+ */
+
+$reviews = $block->getSellerReviews();
+?>
+
+<div class="seller-reviews">
+    <?php foreach($reviews as $review): ?>
+        <li class="item review-item" itemscope itemprop="review" itemtype="http://schema.org/Review">
+            <div class="review-title" itemprop="name"><?= $block->escapeHtml($review->getTitle()) ?></div>
+                <div class="review-ratings">
+                <div class="rating-summary item"
+                        itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+                    <div class="rating-result"
+                            id="review_<?= /* @noEscape */ $review->getReviewId()
+                            ?>_vote"
+                            title="<?= $block->escapeHtmlAttr((int)$review->getRate() * 20) ?>%">
+                        <meta itemprop="worstRating" content = "1"/>
+                        <meta itemprop="bestRating" content = "100"/>
+                        <span>
+                            <span itemprop="ratingValue"><?= $block->escapeHtml((int) $review->getRate() * 20) ?>%</span>
+                        </span>
+                    </div>
+                    <?= /* @noEscape */ $secureRenderer->renderStyleAsTag(
+                        'width:' . (int) $review->getRate() * 20 . '%',
+                        'div#review_' . $review->getReviewId() . '_vote span'
+                    ) ?>
+                </div>
+            </div>
+            <div class="review-details">
+                <div><span>Title: <?= $review->getTitle(); ?></span></div>
+            </div>
+            <div class="review-content" itemprop="description">
+                <?= /* @noEscape */ nl2br($block->escapeHtml($review->getMessage())) ?>
+            </div>
+        </li>
+        </br>
+    <?php endforeach; ?>
+</div>

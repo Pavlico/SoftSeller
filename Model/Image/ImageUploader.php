@@ -9,7 +9,8 @@ namespace Softserve\Seller\Model\Image;
 /**
  * Catalog image uploader
  */
-class ImageUploader {
+class ImageUploader 
+{
     /**
      * Core file storage database
      *

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="main">
+            <block name="sellers" class="Softserve\Seller\Block\Sellers\SellerDetails" template="Softserve_Seller::seller_details.phtml"/>
+            <block name="sellers.reviews" class="Softserve\Seller\Block\Sellers\SellerDetails" template="Softserve_Seller::seller_reviews.phtml"/>
+            <block name="sellers.review-form" class="Softserve\Seller\Block\Sellers\Form" template="Softserve_Seller::seller_review_form.phtml"/>
+            <block name="sellers.products" class="Magento\Catalog\Block\Product\Widget\NewWidget" template="Softserve_Seller::seller_products.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Softserve\Seller\ViewModel\SellerProducts</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
