@@ -62,4 +62,7 @@
             <argument name="imageUploader" xsi:type="object">Softserve\Seller\UploadLogo</argument>
         </arguments>
     </type>
+    <type name="Magento\Checkout\Model\DefaultConfigProvider">
+        <plugin name="checkout-summary-seller-attribute" type="Softserve\Seller\Model\Plugin\Checkout\DefaultConfigProvider" />
+    </type>
 </config>

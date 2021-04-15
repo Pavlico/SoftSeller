@@ -1,0 +1,15 @@
+<?php
+/**
+ * @see \Softserve\Seller\Block\Sellers\SellerDetails
+ */
+
+$sellers = $block->getSellerData();
+?>
+
+<div class="seller-details">
+    <?php foreach($sellers as $seller): ?>
+        <div><span><?= $seller->getDescription();?></span></div>
+        <div><span>Contact:<?= $seller->getContactInfo(); ?></span></div>
+        <div><span><a href="<?= $seller->getLink(); ?>"><?= __('Seller Site') ?></a></span></div>
+    <?php endforeach; ?>
+</div>

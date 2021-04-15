@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Magento\Checkout\Block\Onepage\Success" after="-" name="seller.details" template="Softserve_Seller::order/success.phtml">        	
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Softserve\Seller\ViewModel\SellerSuccess</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

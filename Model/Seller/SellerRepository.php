@@ -89,7 +89,6 @@ class SellerRepository implements SellerRepositoryInterface
             return $sellerCollection->getFirstItem();
         }
         throw new NoSuchEntityException(__('Unable to find seller with code "%1"', $code));
-        return $sellerCollection;
     }
      
     /**

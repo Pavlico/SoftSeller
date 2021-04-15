@@ -1,0 +1,16 @@
+<?php
+/**
+ * @see \Softserve\Seller\Block\Sellers\AllSellers
+ */
+
+$sellers = $block->getAllSellers();
+?>
+
+<div class="sellers-list">
+    <?php foreach($sellers as $seller): ?>
+        <?php
+            $url = $this->getUrl('*/*/' . $seller->getCode());
+        ?>
+        <div><a class="seller" href="<?= $escaper->escapeUrl($url) ?>"><?= $seller->getName();?></a></div>
+    <?php endforeach; ?>
+</div>

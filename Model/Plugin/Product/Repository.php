@@ -9,9 +9,9 @@ class Repository
     private $productExtensionFactory;
 
     /** 
-     * @var Softserve\Seller\Api\SellerRepositoryInterface 
+     * @var Softserve\Seller\Api\SellerProductRepositoryInterface
      */
-    private $sellerInterface;
+    private $sellerProductInterface;
 
     /** 
      * @var Softserve\Seller\Helper\Configuration 
@@ -25,7 +25,7 @@ class Repository
 
     /**
      * @param \Magento\Catalog\Api\Data\ProductExtensionFactory $productExtensionFactory
-     * @param \Softserve\Seller\Api\SellerRepositoryInterface $sellerInterface
+     * @param \Softserve\Seller\Api\SellerProductRepositoryInterface $sellerProductInterface
      * @param \Softserve\Seller\Helper\Configuration $configuration
      * @param \Magento\Catalog\Model\ResourceModel\ProductFactory $productFactory
      */
