@@ -10,6 +10,10 @@
         <plugin name="seller_extensions"
                 type="Softserve\Seller\Model\Plugin\Product\Repository"/>
     </type>
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="order_extensions"
+                type="Softserve\Seller\Model\Plugin\Order\Repository"/>
+    </type>
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">

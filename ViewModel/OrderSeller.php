@@ -1,7 +1,7 @@
 <?php
 namespace Softserve\Seller\ViewModel;
 
-class SellerProducts implements \Magento\Framework\View\Element\Block\ArgumentInterface
+class OrderSeller implements \Magento\Framework\View\Element\Block\ArgumentInterface
 {
     const CODE = 'code';
     /**
@@ -18,14 +18,12 @@ class SellerProducts implements \Magento\Framework\View\Element\Block\ArgumentIn
         \Magento\Catalog\Model\ResourceModel\ProductFactory $productFactory,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollection,
         \Magento\Framework\App\Request\Http $request,
-        \Softserve\Seller\Api\SellerRepositoryInterface $sellerRepository,
-        \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
+        \Softserve\Seller\Api\SellerRepositoryInterface $sellerRepository
     ) {
         $this->productFactory = $productFactory;
         $this->productCollection = $productCollection;
         $this->request = $request;
         $this->sellerRepository = $sellerRepository;
-        $this->productRepository = $productRepository;
     }
 
     /**
@@ -64,33 +62,5 @@ class SellerProducts implements \Magento\Framework\View\Element\Block\ArgumentIn
             return $seller;
         }
         return false;
-    }
-
-    /**
-     * Retrive seller
-     * @return \Softserve\Seller\Api\Data\SellerInterface/bool
-     */
-    public function getSellerByItem($item)
-    {
-        $product = $this->productRepository->getById($item->getProductId());
-        return $this->getSeller($product);
-    }
-
-    /**
-     * Get Sellers array
-     * @return array
-     */
-    public function getSellersArray($items)
-    {
-        $sellersArray = [];
-        foreach ($items as $item) {
-            $seller = $this->getSellerByItem($item);
-            $sellersArray[$seller->getCode()] = [
-                'code' => $seller->getCode(),
-                'name' => $seller->getName(),
-                'logo' => $seller->getLogo()
-            ];
-        }
-        return $sellersArray;
     }
 }
