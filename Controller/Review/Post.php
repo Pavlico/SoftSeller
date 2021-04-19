@@ -33,13 +33,15 @@ class Post implements \Magento\Framework\App\ActionInterface
         \Softserve\Seller\Model\Review\ReviewFactory $reviewFactory,
         \Softserve\Seller\Model\Seller\ResourceModel\Seller $seller,
         \Magento\Framework\App\Request\Http $request,
-        \Magento\Framework\Controller\Result\RedirectFactory $redirectFactory
+        \Magento\Framework\Controller\Result\RedirectFactory $redirectFactory,
+        \Magento\Framework\Stdlib\DateTime\DateTime $date
         
     ) {
         $this->reviewFactory = $reviewFactory;
         $this->seller = $seller;
         $this->request = $request;
         $this->redirectFactory = $redirectFactory;
+        $this->date = $date;
     }
 
     /**
@@ -53,6 +55,7 @@ class Post implements \Magento\Framework\App\ActionInterface
         try {
             $review = $this->reviewFactory->create();
             $review->setData($reviewData);
+            $review->setCreatedAt($this->date->gmtDate());
             $review->save($review);
         } catch (\Exception $e) {
             return $resultRedirect->setPath('*/seller/' . $this->request->getParam('seller_code'));

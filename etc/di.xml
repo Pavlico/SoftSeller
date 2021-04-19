@@ -65,4 +65,11 @@
     <type name="Magento\Checkout\Model\DefaultConfigProvider">
         <plugin name="checkout-summary-seller-attribute" type="Softserve\Seller\Model\Plugin\Checkout\DefaultConfigProvider" />
     </type>
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="assignAttribute" xsi:type="object">Softserve\Seller\Console\GenerateFile</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
