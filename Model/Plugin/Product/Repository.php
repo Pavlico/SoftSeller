@@ -6,22 +6,22 @@ class Repository
     /** 
      * @var Magento\Catalog\Api\Data\ProductExtensionFactory 
      */
-    private $productExtensionFactory;
+    protected $productExtensionFactory;
 
     /** 
      * @var Softserve\Seller\Api\SellerProductRepositoryInterface
      */
-    private $sellerProductInterface;
+    protected $sellerProductInterface;
 
     /** 
      * @var Softserve\Seller\Helper\Configuration 
      */
-    private $configuration;
+    protected $configuration;
 
     /** 
      * @var Magento\Catalog\Model\ResourceModel\ProductFactory
      */
-    private $productFactory;
+    protected $productFactory;
 
     /**
      * @param \Magento\Catalog\Api\Data\ProductExtensionFactory $productExtensionFactory

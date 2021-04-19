@@ -27,4 +27,7 @@
                 <column name="review_id"/>
         </constraint>
     </table>
+    <table name="sales_order">
+        <column xsi:type="text" name="seller_codes" comment="Seller codes"/>
+    </table>
 </schema>
