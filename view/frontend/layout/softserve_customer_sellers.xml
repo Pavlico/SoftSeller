@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd"> 
+    <update handle="customer_account"/> 
+    <body> 
+        <referenceContainer name="content">
+            <block class="Softserve\Seller\Block\Customer\Sellers" name="customer_sellers" template="Softserve_Seller::customer/sellers.phtml"> 
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Softserve\Seller\ViewModel\CustomerSeller</argument>
+                </arguments>
+            </block>
+        </referenceContainer> 
+        <referenceBlock name="sidebar.main.account_nav">
+            <arguments>
+                <argument name="block_title" translate="true" xsi:type="string">Best sellers for you</argument>
+            </arguments>
+        </referenceBlock>
+    </body> 
+</page>
+
