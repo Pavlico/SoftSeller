@@ -1,0 +1,23 @@
+<?php
+/**
+ * @see \Softserve\Seller\Block\Customer\Sellers
+ */
+$customer = $block->getData('customer');
+$orders = $block->getOrders($customer->getId());
+$sellers = $block->getSellers($orders);
+?>
+
+<table class="sellers-list">
+<tr>
+        <th><?= __('Name') ?></th>
+        <th><?= __('Code')?></th>
+        <th><?= __('Count')?></th>
+        </tr>
+    <?php foreach($sellers as $seller): ?>
+        <tr>
+        <th><?= $seller['name'];?></th>
+        <th><?= $seller['code'];?></th>
+        <th><?= $seller['count'];?></th>
+        </tr>
+    <?php endforeach; ?>
+</table>
