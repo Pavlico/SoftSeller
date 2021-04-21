@@ -24,10 +24,16 @@ class Post implements \Magento\Framework\App\ActionInterface
     protected $redirectFactory;
 
     /**
+     * @var \Magento\Framework\Stdlib\DateTime\DateTime
+     */
+    protected $date;
+
+    /**
      * @param \Softserve\Seller\Model\Seller\SellerFactory $sellerFactory
      * @param \Softserve\Seller\Model\Seller\ResourceModel\Seller $seller
      * @param \Magento\Framework\App\Request\Http $request
      * @param \Magento\Framework\Controller\Result\RedirectFactory $redirectFactory
+     * @param \Magento\Framework\Stdlib\DateTime\DateTime $date
      */
     public function __construct(
         \Softserve\Seller\Model\Review\ReviewFactory $reviewFactory,

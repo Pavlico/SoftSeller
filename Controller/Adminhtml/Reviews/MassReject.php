@@ -14,18 +14,26 @@ class MassReject extends \Magento\Backend\App\Action
     protected $collectionFactory;
 
     /**
+     * @var \Magento\Framework\Stdlib\DateTime\DateTime
+     */
+    protected $date;
+
+    /**
      * @param \Magento\Backend\App\Action\Context $context
      * @param \Magento\Ui\Component\MassAction\Filter $filter
      * @param \Softserve\Seller\Model\Review\ResourceModel\Review\CollectionFactory $collectionFactory
+     * @param \Magento\Framework\Stdlib\DateTime\DateTime $date
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
         \Magento\Ui\Component\MassAction\Filter $filter,
-        \Softserve\Seller\Model\Review\ResourceModel\Review\CollectionFactory $collectionFactory
+        \Softserve\Seller\Model\Review\ResourceModel\Review\CollectionFactory $collectionFactory,
+        \Magento\Framework\Stdlib\DateTime\DateTime $date
     ) {
         parent::__construct($context);
         $this->filter = $filter;
         $this->collectionFactory = $collectionFactory;
+        $this->date = $date;
     }
 
     /**
@@ -40,6 +48,7 @@ class MassReject extends \Magento\Backend\App\Action
 
         foreach ($filteredCollection->getItems() as $record) {
             $record->setIsConfirmed(0);
+            $record->setUpdatedAt($this->date->gmtDate());
             $record->save();
             $recordEdited++;
         }

@@ -46,6 +46,11 @@ class Info extends \Magento\Backend\Block\Template
     protected $request;
 
     /**
+     * @var \Magento\Catalog\Api\ProductRepositoryInterface
+     */
+    protected $productRepository;
+
+    /**
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Softserve\Seller\Api\SellerRepositoryInterface $sellerRepository
      * @param \Softserve\Seller\Api\ReviewRepositoryInterface $reviewRepository
@@ -54,6 +59,7 @@ class Info extends \Magento\Backend\Block\Template
      * @param \Magento\Framework\Api\Search\FilterGroup $filterGroup
      * @param \Magento\Framework\Api\Search\FilterGroupBuilder $filterGroupBuilder
      * @param \Magento\Framework\App\Request\Http $request
+     * @param \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
      * @param array $data
      */
     public function __construct(

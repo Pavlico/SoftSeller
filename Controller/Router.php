@@ -4,7 +4,6 @@ namespace Softserve\Seller\Controller;
 use Magento\Framework\App\Action\Forward;
 use Magento\Framework\App\ActionInterface;
 use Magento\Framework\App\RequestInterface;
-use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\App\RouterInterface;
 
 /**

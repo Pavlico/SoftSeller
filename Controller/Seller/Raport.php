@@ -3,42 +3,61 @@ namespace Softserve\Seller\Controller\Seller;
 
 class Raport extends \Magento\Downloadable\Controller\Download
 {
-    protected $resultPageFactory;
+    /**
+     * @var \Magento\Framework\Module\Dir\Reader
+     */
+    protected $moduleReader;
 
     /**
-     * NoRoute constructor.
-     * @param Context $context
-     * @param PageFactory $resultPageFactory
+     * @var \Magento\Framework\App\Response\Http\FileFactory
+     */
+    protected $fileFactory;
+
+    /**
+     * @var \Magento\Framework\Controller\Result\RawFactory
+     */
+    protected $resultRawFactory;
+
+    /**
+     * @param \Magento\Framework\App\Action\Context $context,
+     * @param \Magento\Framework\Module\Dir\Reader $moduleReader,
+     * @param \Magento\Framework\App\Response\Http\FileFactory $fileFactory,
+     * @param \Magento\Framework\Controller\Result\RawFactory $resultRawFactory
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\Module\Dir\Reader $moduleReader,
-        \Magento\Downloadable\Helper\File $file,
-        \Magento\Framework\View\Asset\Repository $assetRepository
+        \Magento\Framework\App\Response\Http\FileFactory $fileFactory,
+        \Magento\Framework\Controller\Result\RawFactory $resultRawFactory
     ) {
         parent::__construct($context);
         $this->moduleReader = $moduleReader;
-        $this->file = $file;
-        $this->assetRepository = $assetRepository;
+        $this->fileFactory = $fileFactory;
+        $this->resultRawFactory = $resultRawFactory;
 
     }
 
     /**
+     * Download raport file
      * @return \Magento\Framework\View\Result\Page
      */
     public function execute()
     {
         $fileName = $this->getRequest()->getParam('file_name');
-        $fileId = 'Softserve_Seller::files/' . $fileName;
-        $params = [
-            'area' => 'frontend'
-        ];
-        $asset = $this->assetRepository->createAsset($fileId, $params);
-        try {
-            return $asset->getSourceFile();
-        } catch (\Exception $e) {
-            return null;
-        }
-        return;
+        $baseDir = $this->moduleReader->getModuleDir('', 'Softserve_Seller');
+        $path = $baseDir . '/view/frontend/web/files/' . $fileName;
+        $this->fileFactory->create(
+            $fileName,
+            [
+                'type' => 'filename',
+                'value' => $path
+            ],
+            \Magento\Framework\App\Filesystem\DirectoryList::APP,
+            'application/octet-stream',
+            ''
+        );
+
+        $resultRaw = $this->resultRawFactory->create();
+        return $resultRaw;
     }
 }
