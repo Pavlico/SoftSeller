@@ -4,15 +4,38 @@ namespace Softserve\Seller\ViewModel;
 class SellerProducts implements \Magento\Framework\View\Element\Block\ArgumentInterface
 {
     const CODE = 'code';
+
     /**
      * @var \Magento\Catalog\Model\ResourceModel\ProductFactory
      */
     protected $productFactory;
 
     /**
-     * @param \Magento\Framework\View\Element\Template\Context $context
+     * @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory
+     */
+    protected $productCollection;
+
+    /**
+     * @var \Magento\Framework\App\Request\Http
+     */
+    protected $request;
+
+    /**
+     * @var \Softserve\Seller\Api\SellerRepositoryInterface
+     */
+    protected $sellerRepository;
+
+    /**
+     * @var \Magento\Catalog\Api\ProductRepositoryInterface
+     */
+    protected $productRepository;
+
+    /**
      * @param \Magento\Catalog\Model\ResourceModel\ProductFactory $productFactory
-     * @param array $data
+     * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollection
+     * @param \Magento\Framework\App\Request\Http $request
+     * @param \Softserve\Seller\Api\SellerRepositoryInterface $sellerRepository
+     * @param \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
      */
     public function __construct(
         \Magento\Catalog\Model\ResourceModel\ProductFactory $productFactory,

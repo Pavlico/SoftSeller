@@ -17,10 +17,16 @@ class GenerateFile extends \Symfony\Component\Console\Command\Command
      * @var \Softserve\Seller\Model\File\Generator
      */
     private $generator;
+
+    /**
+     * @var \Magento\Framework\UrlInterface
+     */
+    private $urlInterface;
     
     /**
      * @param \Magento\Framework\App\State $state
      * @param \Softserve\Seller\Model\File\Generator $generator
+     * @param \Magento\Framework\UrlInterface $urlInterface
      */
     public function __construct(
         \Magento\Framework\App\State $state,

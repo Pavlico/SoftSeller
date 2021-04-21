@@ -4,6 +4,7 @@ namespace Softserve\Seller\Block\Customer;
 class Sellers extends \Magento\Framework\View\Element\Template
 {
     protected $sellersArray = [];
+
     /**
      * @var \Magento\Sales\Model\ResourceModel\Order\CollectionFactory
      */
@@ -85,8 +86,8 @@ class Sellers extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * Retrive seller
-     * @return \Softserve\Seller\Api\Data\SellerInterface/bool
+     * Retrive sellers by items from orders
+     * @return array
      */
     public function getSellers($orders)
     {
@@ -100,7 +101,7 @@ class Sellers extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * Retrive seller
+     * Retrive seller by order item
      * @return \Softserve\Seller\Api\Data\SellerInterface/bool
      */
     public function getSellerByItem($item)

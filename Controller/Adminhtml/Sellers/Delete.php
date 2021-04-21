@@ -9,8 +9,6 @@ class Delete extends \Magento\Backend\App\Action
     protected $sellerFactory;
 
     /**
-     * Delete constructor.
-     *
      * @param \Magento\Backend\App\Action\Context $context
      * @param \Softserve\Seller\Model\Seller\SellerFactory $sellerFactory
      */
@@ -45,7 +43,6 @@ class Delete extends \Magento\Backend\App\Action
         } else {
             $this->messageManager->addErrorMessage(__('We can\'t find a seller to delete.'));
         }
-
         return $resultRedirect->setPath('*/*/');
     }
 }

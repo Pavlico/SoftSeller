@@ -31,7 +31,7 @@ class View extends \Magento\Backend\App\Action
     /**
      * View review with requested id
      *
-     * @return \Magento\Framework\View\Result\Page
+     * @return \Magento\Framework\View\Result\Page/\Magento\Framework\Controller\Result\Redirect
      */
     public function execute()
     {
@@ -43,10 +43,8 @@ class View extends \Magento\Backend\App\Action
             $model->load($reviewId);
         } catch (\Magento\Framework\Exception\NoSuchEntityException $exception) {
             $this->messageManager->addErrorMessage(__('This review no longer exists.'));
-            $this->_redirect('*/*');
-            return;
+            return $this->_redirect('*/*');
         }
-
         return $resultPage;
     }
 }

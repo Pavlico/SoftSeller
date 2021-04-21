@@ -3,10 +3,8 @@ namespace Softserve\Seller\Model\File;
 
 use Magento\Eav\Api\AttributeManagementInterface;
 use Magento\Catalog\Model\Config;
-use Magento\Eav\Api\Data\AttributeSetInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Catalog\Api\AttributeSetRepositoryInterface;
-use Magento\Framework\Filesystem\DirectoryList;
 
 class Generator extends \Magento\Framework\Model\AbstractExtensibleModel
 {
@@ -37,9 +35,9 @@ class Generator extends \Magento\Framework\Model\AbstractExtensibleModel
      * @param SearchCriteriaBuilder $searchCriteriaBuilder
      */
     public function __construct(
-        AttributeManagementInterface $attributeManagementInterface,
-        Config $configAttr,
-        AttributeSetRepositoryInterface $attributeSetRepository,
+        \Magento\Eav\Api\AttributeManagementInterface $attributeManagementInterface,
+        \Magento\Catalog\Model\Config $configAttr,
+        \Magento\Catalog\Api\AttributeSetRepositoryInterface $attributeSetRepository,
         \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder,
         \Magento\Framework\Api\FilterBuilder $filterBuilder,
         \Magento\Framework\Api\Search\FilterGroup $filterGroup,
@@ -50,7 +48,6 @@ class Generator extends \Magento\Framework\Model\AbstractExtensibleModel
         \Magento\Framework\Module\Dir\Reader $moduleReader,
         \Magento\Framework\Filesystem $filesystem,
         \Magento\Framework\App\Filesystem\DirectoryList $directoryList,
-        \Magento\Framework\Filesystem\Io\File $file,
         \Magento\Framework\Convert\ConvertArray $convertArray
     ) {
         $this->attributeManagementInterface = $attributeManagementInterface;
@@ -66,7 +63,6 @@ class Generator extends \Magento\Framework\Model\AbstractExtensibleModel
         $this->moduleReader = $moduleReader;
         $this->filesystem = $filesystem;
         $this->directoryList = $directoryList;
-        $this->file = $file;
         $this->convertArray = $convertArray;
     }
 

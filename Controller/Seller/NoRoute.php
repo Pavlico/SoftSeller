@@ -3,12 +3,13 @@ namespace Softserve\Seller\Controller\Seller;
 
 class NoRoute implements \Magento\Framework\App\ActionInterface
 {
-    protected $resultPageFactory;
+    /**
+     * @var \Magento\Framework\View\Result\PageFactory
+     */
+    protected $reviewFactory;
 
     /**
-     * NoRoute constructor.
-     * @param Context $context
-     * @param PageFactory $resultPageFactory
+     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
      */
     public function __construct(
         \Magento\Framework\View\Result\PageFactory $resultPageFactory

@@ -14,6 +14,11 @@ class Activate extends \Magento\Backend\App\Action
     protected $resultPageFactory;
 
     /**
+     * @var \Softserve\Seller\Model\Seller\SellerFactory
+     */
+    protected $sellerFactory;
+
+    /**
      * @param \Magento\Backend\App\Action\Context $context
      * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
      * @param \Softserve\Seller\Model\Seller\SellerFactory $registry
