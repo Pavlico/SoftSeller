@@ -60,6 +60,10 @@ class ProductAttributePatch implements DataPatchInterface
             'user_defined' => true,
             'visible' => true,
             'filterable' => true,
+            'is_used_in_grid' => true,
+            'is_visible_in_grid' => true,
+            'used_in_product_listing' => true,
+            'is_filterable_in_grid' => true,
             'required' => true,
             'group' => 'General',
         ]);
