@@ -4,11 +4,6 @@ namespace Softserve\Seller\Test\Unit\Model\Seller;
 
 class SellerRepositoryTest extends \PHPUnit\Framework\TestCase
 {
-    // /**
-    //  * @var \PHPUnit_Framework_MockObject_MockBuilder
-    //  */
-    // private $sellerFactory;
-
     public function setUp(): void
     {
         $this->sellerFactory = $this->getMockBuilder(\Softserve\Seller\Model\Seller\SellerFactory::class)
