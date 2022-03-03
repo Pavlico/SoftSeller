@@ -102,6 +102,9 @@ class SellerRepository implements SellerRepositoryInterface
         if (!$this->validate()) {
             throw new CouldNotSaveException(__('Not enabled by module config'));
         }
+        if (empty($seller->getData())) {
+            throw new CouldNotSaveException(__('No required data'));
+        }
         $sellerResource = $this->sellerFactory->create()->getResource();
         $sellerId = $seller->getSellerId();
         try {
