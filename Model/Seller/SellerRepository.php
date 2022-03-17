@@ -3,7 +3,7 @@ namespace Softserve\Seller\Model\Seller;
 
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Framework\Exception\StateException;
+use Magento\Framework\Exception\CouldNotDeleteException;
 use Softserve\Seller\Api\SellerRepositoryInterface;
 
 class SellerRepository implements SellerRepositoryInterface
@@ -61,9 +61,6 @@ class SellerRepository implements SellerRepositoryInterface
      */
     public function getById($id)
     {
-        if (!$this->validate()) {
-            throw new CouldNotSaveException(__('Not enabled by module config'));
-        }
         $seller = $this->sellerFactory->create();
         $seller->getResource()->load($seller, $id);
         if (!$seller->getId()) {
@@ -80,9 +77,6 @@ class SellerRepository implements SellerRepositoryInterface
      */
     public function get($code)
     {
-        if (!$this->validate()) {
-            throw new CouldNotSaveException(__('Not enabled by module config'));
-        }
         $sellerCollection = $this->collectionFactory->create();
         $sellerCollection->getByCode($code);
         if ($sellerCollection->getSize()) {
@@ -99,9 +93,6 @@ class SellerRepository implements SellerRepositoryInterface
      */
     public function save(\Softserve\Seller\Api\Data\SellerInterface $seller)
     {
-        if (!$this->validate()) {
-            throw new CouldNotSaveException(__('Not enabled by module config'));
-        }
         if (empty($seller->getData())) {
             throw new CouldNotSaveException(__('No required data'));
         }
@@ -126,39 +117,29 @@ class SellerRepository implements SellerRepositoryInterface
      *
      * @param Softserve\Seller\Api\Data\SellerInterface
      * @return bool Will returned True if deleted
-     * @throws \Magento\Framework\Exception\StateException
+     * @throws \Magento\Framework\Exception\CouldNotDeleteException
      */
     public function delete(\Softserve\Seller\Api\Data\SellerInterface $seller)
     {
-        if (!$this->validate()) {
-            throw new CouldNotSaveException(__('Not enabled by module config'));
+        $sellerResource = $this->sellerFactory->create()->getResource();
+        try {
+            $sellerResource->delete($seller);
+            return $seller;
+        } catch (\Exception $e) {
+            throw new CouldNotDeleteException(__('Seller not deleted, doesnt exist'));
         }
-        $sellerResource = $this->sellerFactory->create();
-        $sellerResource->getResource()->delete($seller);
-        if ($seller->getSellerId()) {
-            throw new StateException(__('Unable to delete seller'));
-        }
-        return true;
     }
 
     /**
      * @param string $sellerId
      * @return bool Will returned True if deleted
+     * @throws \Magento\Framework\Exception\CouldNotDeleteException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
-     * @throws \Magento\Framework\Exception\StateException
      */
     public function deleteById($sellerId)
     {
-        if (!$this->validate()) {
-            throw new CouldNotSaveException(__('Not enabled by module config'));
-        }
-        $seller = $this->sellerFactory->create();
-        $seller->getResource()->load($seller, $sellerId);
-        if (!$seller->getSellerId()) {
-            throw new NoSuchEntityException(__('Unable to find seller with ID "%1"', $sellerId));
-        }
-        $seller->delete($seller);
-        return true;
+        $seller = $this->getById($sellerId);
+        return $this->delete($seller);
     }
 
     /**
@@ -177,21 +158,5 @@ class SellerRepository implements SellerRepositoryInterface
         $this->searchResults->setItems($collection->getItems());
         $this->searchResults->setTotalCount($collection->getSize());
         return $this->searchResults;
-    }
-    
-    /**
-     * Validate for api request and check if config enables it
-     * @return bool
-     */
-    private function validate()
-    {
-        $area = $this->state->getAreaCode();
-        if (($area == \Magento\Framework\App\Area::AREA_WEBAPI_REST ||
-            $area == \Magento\Framework\App\Area::AREA_WEBAPI_REST) &&
-            !$this->configuration->getApiEnabled()
-        ) {
-            return false;
-        }
-        return true;
     }
 }

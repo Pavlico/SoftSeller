@@ -51,7 +51,7 @@ class Info extends \Magento\Backend\Block\Template
     protected $productRepository;
 
     /**
-     * @param \Magento\Framework\View\Element\Template\Context $context
+     * @param \Magento\Backend\Block\Template\Context $context
      * @param \Softserve\Seller\Api\SellerRepositoryInterface $sellerRepository
      * @param \Softserve\Seller\Api\ReviewRepositoryInterface $reviewRepository
      * @param \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
@@ -63,7 +63,7 @@ class Info extends \Magento\Backend\Block\Template
      * @param array $data
      */
     public function __construct(
-        \Magento\Framework\View\Element\Template\Context $context,
+        \Magento\Backend\Block\Template\Context $context,
         \Softserve\Seller\Api\SellerRepositoryInterface $sellerRepository,
         \Softserve\Seller\Api\ReviewRepositoryInterface $reviewRepository,
         \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder,
